@@ -8,12 +8,17 @@ window.onload = () => {
         const todoText = todo.value ;
         todo.value ='';
         todos.push(todoText)
-        console.log(todoText);
-        const todoList = document.getElementById('todo-list')
-        todoList.innerHTML = '';
-        for( let i = 0; i < todos.length; i++){
-            todoList.innerHTML += '<li>' + todos [i] + '</li>';
-        }
-        console.log(todos)
+        const todoList = document.getElementById('todo-list');
+        const todosTemplate = todos.map (t => '<li>' + t + '</li>');
+        todoList.innerHTML = todosTemplate.join('');
+        const elementos = document.querySelectorAll('#todo-list li')
+        elementos.forEach ((elemento, i) => {
+            
+            elemento.addEventListener( 'click' ,()=> {
+                elemento.parentNode.removeChild(elemento)
+                todos.splice(i,1)
+                console.log(elemento ,i)
+            })
+        })
     }
 }
